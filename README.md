@@ -21,7 +21,7 @@ With `gulp watch`, changes in files trigger the rebuild of the relevant parts.
 
 * Run `gulp build`.
 
-Find you build at `build/`.
+You can find your build in the `build/` folder.
 
 
 
@@ -45,6 +45,10 @@ This project includes two tasks which work quite similarly.
 * Javascript source files in `app/src` are bundled to `build/lib/main.js` using browserify (uses reactify for converting JSX code to regular js)
 
 The **watch** task listens to changes in files and automatically rebuilds the project as needed. It does not minimize the code. The **build** task minimizes and uglifies the javascript code.
+
+### Caveats
+
+Deletion of files sometimes do not trigger rebuilds with `gulp watch`. In those cases, restart the *watch* task.
 
 
 ## Gulp modules
