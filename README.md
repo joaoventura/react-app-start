@@ -15,12 +15,13 @@ It uses browserify to bundle the javascript source files, and gulp.js to automat
 * Run `gulp watch` and start developing
 * Open `dist/index.html` to display the app.
 
-With *gulp watch* changes in files trigger the rebuild of the relevant parts.
+With `gulp watch`, changes in files trigger the rebuild of the relevant parts.
 
 ### Deployment
 
 * Run `gulp`.
-* Find you build at *dist/*.
+
+Find you build at `dist/.
 
 
 
@@ -48,7 +49,7 @@ The **watch** task listens to changes in files and automatically rebuilds the pr
 
 ## Gulp modules
 
-The gulp task depends on the following modules:
+The gulp task uses the following modules:
 
 * gulp: The task runner
 * gulp-concat: To concatenate files
