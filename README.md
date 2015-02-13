@@ -54,11 +54,9 @@ The gulp task depends on the following modules:
 * gulp-concat: To concatenate files
 * browserify: To bundle the javascript source files into one file
 * reactify: Necessary if you need to parse JSX files before bundling with browserify
-
 * vinyl-source-stream: Create input stream for browserify
 * gulp-if: Conditionally run a task
 * gulp-uglify: Minimize and obfuscate js code
 * gulp-streamify: Convert uglify pipe streams to browserify streams
-
 * gulp-watch: To watch for changes in `app/assets`, `app/lib` and `app/index.html`
 * watchify: To watch for changes in browserify
