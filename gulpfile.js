@@ -32,6 +32,9 @@ var browserifyTask = function (options) {
         entries: [options.src],         // Entry point, browserify finds the rest
         transform: options.transform,   // Apply transformations
         debug: true,                    // Gives us source mapping
+        cache: {},
+        packageCache: {},
+        fullPaths: true
     });
     var rebundle = function () {
         appBundle.bundle()
