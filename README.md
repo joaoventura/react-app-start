@@ -26,7 +26,7 @@ Open *dist/index.html* in the browser. For every change you make to your sources
 
 ### Files and folders
 
-Include your static assets in `app/assets`, your external libraries in `app/lib` and your own code in `app/src`. Update the html file at `app/index.html` as needed.
+Include your static assets in `app/assets`, your external libraries in `app/lib` and your source code in `app/src`. Update the html file at `app/index.html` as needed.
 
 ### Default gulp task
 
@@ -39,7 +39,7 @@ The default gulp task works in the following way (see gulpfile.js source).
 
 For bundles, you can update the gulpfile to add uglification. As for external libraries, if you just want to copy the libraries in `app/lib` instead of creating a bundle, change the behavior to a copy task in the gulpfile.
 
-For the browserify task, you can set `watchify: true` so that changes in `app/src` trigger an automatic browserify rebundle.
+For each task, you can set `watch: true` to recompile automatically the changed files.
 
 
 ### Gulp modules
@@ -57,3 +57,8 @@ Utility modules:
 * gulp-if: Conditionally run a task
 * gulp-uglify: Minimize and obfuscate js code
 * gulp-streamify: Convert uglify pipe streams to browserify streams
+
+Watch modules:
+
+* gulp-watch: To watch for changes in `app/assets`, `app/lib` and `app/index.html`
+* watchify: To watch for changes in browserify
