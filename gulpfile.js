@@ -1,6 +1,8 @@
 /**
  * This gulpfile handles the automatic build of the application
- *
+ * It has two tasks:
+ *     watch: builds the project and listens to changes in files
+ *     default: builds the project once
  */
 
 var browserify = require('browserify');
@@ -16,6 +18,11 @@ var watchify = require('watchify');
 
 
 
+/*
+* Copies from 'src' to 'dest'.
+* Options:
+*     - watch: watch for changes in 'src' files.
+*/
 var copyTask = function (options) {
     if (options.watch) {
         gulp.src(options.src)
@@ -27,6 +34,13 @@ var copyTask = function (options) {
     }
 }
 
+/*
+* Bundles 'src' files to 'dest/bundle'.
+* Options:
+*     - bundle: the bundle name
+*     - uglify: minimize ang uglify javascript code
+*     - watch: watch for changes in 'src' files.
+*/
 var bundleTask = function (options) {
     if (options.watch) {
         gulp.src(options.src)
@@ -42,7 +56,16 @@ var bundleTask = function (options) {
     }
 }
 
+/*
+* Browserifies 'src' files to 'dest/bundle'.
+* Options:
+*     - bundle: the bundle name
+*     - transform: array of transformations
+*     - uglify: minimize ang uglify javascript code
+*     - watch: watch for changes in 'src' files.
+*/
 var browserifyTask = function (options) {
+
     // browserify src must start with ./
     if (options.src.indexOf('./') !== 0)
         options.src = './' + options.src;
@@ -70,29 +93,32 @@ var browserifyTask = function (options) {
     rebundle();
 }
 
-
-
-// Default gulp.js task
-gulp.task('default', function () {
+/*
+* Project-specific build task
+* Options:
+*     - watch: listen to changes in files
+*     - uglify: minimize ang uglify javascript code
+*/
+var buildTask = function (options) {
 
     copyTask({
         src: 'app/assets/**',
         dest: 'dist/assets',
-        watch: false
+        watch: options.watch
     });
 
     copyTask({
         src: 'app/*.html',
         dest: 'dist',
-        watch: false
+        watch: options.watch
     });
 
     bundleTask({
         src: 'app/lib/*.js',
         dest: 'dist/lib',
         bundle: 'lib.js',
-        uglify: false,
-        watch: false
+        uglify: options.uglify,
+        watch: options.watch
     });
 
     browserifyTask({
@@ -100,6 +126,30 @@ gulp.task('default', function () {
         dest: 'dist/lib',
         bundle: 'main.js',
         transform: [reactify],  // Handle JSX
+        uglify: options.uglify,
+        watch: options.watch
+    });
+}
+
+
+/*
+* Default gulp task
+* Builds the project to /dist and minimizes javascript
+*/
+gulp.task('default', function () {
+    buildTask({
+        uglify: true,
+        watch: false
+    });
+});
+
+/*
+* Development gulp task
+* Builds the project to /dist and watches for changes in files
+* Rebuilds only the changed parts
+*/
+gulp.task('watch', function () {
+    buildTask({
         uglify: false,
         watch: true
     });

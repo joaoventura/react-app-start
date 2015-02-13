@@ -1,6 +1,8 @@
 # React-app-start
 
-A minimalist boilerplate for react.js applications. Uses browserify to bundle the javascript source files, and gulp.js to automate the building process.
+A simple boilerplate for react.js applications.
+
+It uses browserify to bundle the javascript source files, and gulp.js to automate the building process. It also provides ways to listen to changes in files and rebuild the project automatically.
 
 
 
@@ -16,9 +18,15 @@ Install the node modules which are needed for building the project.
 
 Make sure *gulp* is installed globally, else do `npm install -g gulp`.
 
+* Run `gulp watch`.
+
+Open *dist/index.html* in the browser. Changes in files trigger automatic rebuild of the relevant parts.
+
+### Production
+
 * Run `gulp`.
 
-Open *dist/index.html* in the browser. For every change you make to your sources, you must run `gulp`. Update the gulp file with *watchify* if you want automatic compilations on each change to the source code.
+The build is at *dist/*.
 
 
 
@@ -37,9 +45,20 @@ The default gulp task works in the following way (see gulpfile.js source).
 * Javascript libraries in `app/lib` are bundled to `dist/lib/lib.js`
 * Javascript source files in `app/src` are bundled to `dist/lib/main.js` using browserify (uses reactify for converting JSX code to regular js)
 
-For bundles, you can update the gulpfile to add uglification. As for external libraries, if you just want to copy the libraries in `app/lib` instead of creating a bundle, change the behavior to a copy task in the gulpfile.
+Javascript is minimized and uglified using *uglify*.
 
-For each task, you can set `watch: true` to recompile automatically the changed files.
+### Watch gulp task
+
+It is similar to the default task, but listens to changes in files and automatically rebuilds the project and does not uglify the javascript file.
+
+### Create other tasks
+
+You can change the gulpfile.js however you like:
+
+* Watch only for changes in some files (for performance reasons)
+* Add/Remove uglification
+* Add/Remove other folders
+* Change behaviors
 
 
 ### Gulp modules
