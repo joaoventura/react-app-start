@@ -15,7 +15,7 @@ It uses browserify to bundle the javascript source files, and gulp.js to automat
 * Run `gulp watch` and start developing
 * Open `build/index.html` to display the app.
 
-With `gulp watch`, changes in files trigger the rebuild of the relevant parts.
+With `gulp watch`, changes in files trigger the rebuild of the relevant parts. However, deletion of files are problematic and do not trigger the rebuild. In those cases, clean with `gulp clean` and re-run the *watch* task.
 
 ### Deployment
 
@@ -45,10 +45,6 @@ This project includes two tasks which work quite similarly.
 * Javascript source files in `app/src` are bundled to `build/lib/main.js` using browserify (uses reactify for converting JSX code to regular js)
 
 The **watch** task listens to changes in files and automatically rebuilds the project as needed. It does not minimize the code. The **build** task minimizes and uglifies the javascript code.
-
-### Caveats
-
-Deletion of files sometimes do not trigger rebuilds with `gulp watch`. In those cases, restart the *watch* task or do `gulp clean` to clean the *build* directory.
 
 
 ## Gulp modules
