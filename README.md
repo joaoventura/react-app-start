@@ -61,7 +61,7 @@ You can change the gulpfile.js however you like:
 * Change behaviors
 
 
-### Gulp modules
+## Gulp modules
 
 The gulp task depends on the following modules:
 
