@@ -13,7 +13,8 @@
         "gulp-streamify": "^0.0.5",
         "gulp-uglify": "^0.3.2",
         "reactify": "^1.0.0",
-        "vinyl-source-stream": "^1.0.0"
+        "vinyl-source-stream": "^1.0.0",
+        "watchify": "^2.3.0"
     },
 
     "dependencies": {

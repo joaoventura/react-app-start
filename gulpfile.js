@@ -11,6 +11,7 @@ var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 
 
 
@@ -32,10 +33,19 @@ var browserifyTask = function (options) {
         transform: options.transform,   // Apply transformations
         debug: true,                    // Gives us source mapping
     });
-    appBundle.bundle()
-        .pipe(source(options.bundle))
-        .pipe(gulpif(options.uglify, streamify(uglify())))
-        .pipe(gulp.dest(options.dest))
+    var rebundle = function () {
+        appBundle.bundle()
+            .pipe(source(options.bundle))
+            .pipe(gulpif(options.uglify, streamify(uglify())))
+            .pipe(gulp.dest(options.dest))
+    }
+
+    if (options.watchify) {
+        appBundle = watchify(appBundle);
+        appBundle.on('update', rebundle);
+    }
+
+    rebundle();
 }
 
 
@@ -65,7 +75,7 @@ gulp.task('default', function () {
         dest: './dist/lib',
         bundle: 'main.js',
         uglify: false,
+        watchify: true,
         transform: [reactify]  // Handle JSX
     });
-
 });

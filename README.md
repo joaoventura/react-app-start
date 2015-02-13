@@ -39,6 +39,9 @@ The default gulp task works in the following way (see gulpfile.js source).
 
 For bundles, you can update the gulpfile to add uglification. As for external libraries, if you just want to copy the libraries in `app/lib` instead of creating a bundle, change the behavior to a copy task in the gulpfile.
 
+For the browserify task, you can set `watchify: true` so that changes in `app/src` trigger an automatic browserify rebundle.
+
+
 ### Gulp modules
 
 The gulp task depends on the following modules:
