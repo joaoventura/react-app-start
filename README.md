@@ -21,7 +21,7 @@ With `gulp watch`, changes in files trigger the rebuild of the relevant parts.
 
 * Run `gulp`.
 
-Find you build at `dist/.
+Find you build at `dist/`.
 
 
 
