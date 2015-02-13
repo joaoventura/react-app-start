@@ -13,15 +13,15 @@ It uses browserify to bundle the javascript source files, and gulp.js to automat
 * Run `npm install` to install the necessary *node.js* modules
 * Run `npm install -g gulp` to install *gulp* globally
 * Run `gulp watch` and start developing
-* Open `dist/index.html` to display the app.
+* Open `build/index.html` to display the app.
 
 With `gulp watch`, changes in files trigger the rebuild of the relevant parts.
 
 ### Deployment
 
-* Run `gulp`.
+* Run `gulp build`.
 
-Find you build at `dist/`.
+Find you build at `build/`.
 
 
 
@@ -39,12 +39,12 @@ Find you build at `dist/`.
 
 This project includes two tasks which work quite similarly.
 
-* The `app/index.html` file is copied to `dist/index.html`
-* Assets in `app/assets` are copied to `dist/assets`
-* Javascript libraries in `app/lib` are bundled to `dist/lib/lib.js`
-* Javascript source files in `app/src` are bundled to `dist/lib/main.js` using browserify (uses reactify for converting JSX code to regular js)
+* The `app/index.html` file is copied to `build/index.html`
+* Assets in `app/assets` are copied to `build/assets`
+* Javascript libraries in `app/lib` are bundled to `build/lib/lib.js`
+* Javascript source files in `app/src` are bundled to `build/lib/main.js` using browserify (uses reactify for converting JSX code to regular js)
 
-The **watch** task listens to changes in files and automatically rebuilds the project as needed. It does not minimize the code. The **default** task minimizes and uglifies the javascript code.
+The **watch** task listens to changes in files and automatically rebuilds the project as needed. It does not minimize the code. The **build** task minimizes and uglifies the javascript code.
 
 
 ## Gulp modules

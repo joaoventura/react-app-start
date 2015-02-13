@@ -110,7 +110,7 @@ var browserifyTask = function (options) {
 }
 
 /*
-* Project-specific build task
+* Project generic build task
 * Options:
 *     - watch: listen to changes in files
 *     - uglify: minimize ang uglify javascript code
@@ -119,19 +119,19 @@ var buildTask = function (options) {
 
     copyTask({
         src: 'app/assets/**',
-        dest: 'dist/assets',
+        dest: 'build/assets',
         watch: options.watch
     });
 
     copyTask({
         src: 'app/*.html',
-        dest: 'dist',
+        dest: 'build/',
         watch: options.watch
     });
 
     bundleTask({
         src: 'app/lib/*.js',
-        dest: 'dist/lib',
+        dest: 'build/lib',
         bundle: 'lib.js',
         uglify: options.uglify,
         watch: options.watch
@@ -139,7 +139,7 @@ var buildTask = function (options) {
 
     browserifyTask({
         src: 'app/src/main.js',
-        dest: 'dist/lib',
+        dest: 'build/lib',
         bundle: 'main.js',
         transform: [reactify],  // Handle JSX
         uglify: options.uglify,
@@ -149,24 +149,23 @@ var buildTask = function (options) {
 
 
 /*
-* Default gulp task
-* Builds the project to /dist and minimizes javascript
-*/
-gulp.task('default', function () {
-    buildTask({
-        uglify: true,
-        watch: false
-    });
-});
-
-/*
 * Development gulp task
-* Builds the project to /dist and watches for changes in files
-* Rebuilds only the changed parts
+* Builds the project to /build while watching for changes in files
 */
 gulp.task('watch', function () {
     buildTask({
         uglify: false,
         watch: true
+    });
+});
+
+/*
+* Production gulp task
+* Builds the project to /build and minimizes javascript code
+*/
+gulp.task('build', function () {
+    buildTask({
+        uglify: true,
+        watch: false
     });
 });
