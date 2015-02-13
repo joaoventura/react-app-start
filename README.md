@@ -48,21 +48,22 @@ The **watch** task listens to changes in files and automatically rebuilds the pr
 
 ### Caveats
 
-Deletion of files sometimes do not trigger rebuilds with `gulp watch`. In those cases, restart the *watch* task.
+Deletion of files sometimes do not trigger rebuilds with `gulp watch`. In those cases, restart the *watch* task or do `gulp clean` to clean the *build* directory.
 
 
 ## Gulp modules
 
 The gulp task uses the following modules:
 
-* **gulp**: The task runner
-* **gulp-concat**: To concatenate files
 * **browserify**: To bundle the javascript source files into one file
-* **reactify**: Necessary if you need to parse JSX files before bundling with browserify
-* **vinyl-source-stream**: Create input stream for browserify
+* **del**: To remove the build folder
+* **gulp**: The task runner
+* **gulp-continuous-concat**: To concatenate files
 * **gulp-if**: Conditionally run a task
 * **gulp-notify**: Gulp notifications
-* **gulp-uglify**: Minimize and obfuscate js code
 * **gulp-streamify**: Convert uglify pipe streams to browserify streams
+* **gulp-uglify**: Minimize and obfuscate js code
 * **gulp-watch**: To watch for changes in `app/assets`, `app/lib` and `app/index.html`
+* **reactify**: Necessary if you need to parse JSX files before bundling with browserify
+* **vinyl-source-stream**: Create input stream for browserify
 * **watchify**: To watch for changes in browserify

@@ -6,6 +6,7 @@
  */
 
 var browserify = require('browserify');
+var del = require('del');
 var gulp = require('gulp');
 var concat = require('gulp-continuous-concat');
 var gulpif = require('gulp-if');
@@ -164,8 +165,17 @@ gulp.task('watch', function () {
 * Builds the project to /build and minimizes javascript code
 */
 gulp.task('build', function () {
+    del('./build');
     buildTask({
         uglify: true,
         watch: false
     });
+});
+
+/*
+* Clean gulp task
+* Cleans the project /build directory
+*/
+gulp.task('clean', function () {
+    del('./build');
 });
