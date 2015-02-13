@@ -9,6 +9,7 @@ var browserify = require('browserify');
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
+var notify = require('gulp-notify');
 var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
@@ -17,6 +18,12 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
 
+
+var print = function (message) {
+    var date = new Date();
+    var time = date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+    console.log('[' + time + '] ' + message);
+}
 
 /*
 * Copies from 'src' to 'dest'.
@@ -27,7 +34,10 @@ var copyTask = function (options) {
     if (options.watch) {
         gulp.src(options.src)
             .pipe(watch(options.src))
-            .pipe(gulp.dest(options.dest));
+            .pipe(gulp.dest(options.dest))
+            .pipe(notify(function () {
+                print('Detected changes in ' + options.src);
+            }));
     } else {
         gulp.src(options.src)
             .pipe(gulp.dest(options.dest));
@@ -44,15 +54,18 @@ var copyTask = function (options) {
 var bundleTask = function (options) {
     if (options.watch) {
         gulp.src(options.src)
-            .pipe(watch(options.src))
             .pipe(concat(options.bundle))
+            .pipe(watch(options.src))
             .pipe(gulpif(options.uglify, streamify(uglify())))
             .pipe(gulp.dest(options.dest))
+            .pipe(notify(function () {
+                print('Detected changes in ' + options.src);
+            }));
     } else {
         gulp.src(options.src)
             .pipe(concat(options.bundle))
             .pipe(gulpif(options.uglify, streamify(uglify())))
-            .pipe(gulp.dest(options.dest))
+            .pipe(gulp.dest(options.dest));
     }
 }
 
@@ -83,6 +96,9 @@ var browserifyTask = function (options) {
             .pipe(source(options.bundle))
             .pipe(gulpif(options.uglify, streamify(uglify())))
             .pipe(gulp.dest(options.dest))
+            .pipe(notify(function () {
+                print('Detected changes in ' + options.src);
+            }));
     }
 
     if (options.watch) {

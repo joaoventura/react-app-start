@@ -10,6 +10,7 @@
         "gulp": "^3.8.11",
         "gulp-concat": "^2.4.0",
         "gulp-if": "^1.2.5",
+        "gulp-notify": "^2.2.0",
         "gulp-streamify": "^0.0.5",
         "gulp-uglify": "^0.3.2",
         "gulp-watch": "^4.1.1",
